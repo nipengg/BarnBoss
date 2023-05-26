@@ -15,6 +15,7 @@ class Rating extends Model
         'id',
         'invoice_id',
         'rating',
+        'comment',
     ];
 
     protected $hidden = [];

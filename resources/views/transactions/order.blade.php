@@ -39,9 +39,57 @@
                                 <td>{{ $item->status }}</td>
                                 <td>{{ $item->created_at }}</td>
                                 <td>
-                                    <a href="" class="btn btn-info">
-                                        Edit order status
-                                    </a>
+                                    <button type="button" class="btn btn-info" data-toggle="modal"
+                                        data-target="#exampleModal{{ $item->invoice_id }}">Edit order status</button>
+
+                                    <div class="modal fade" id="exampleModal{{ $item->invoice_id }}" tabindex="-1"
+                                        role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <form method="POST" action="{{ route('order.status.update', $item->invoice_id) }}">
+                                                    @csrf
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Edit order
+                                                            #{{ $item->invoice_id }} status</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="form-group">
+                                                            <label for="recipient-name"
+                                                                class="col-form-label">Status</label>
+                                                            <select class="form-control" name="status" id="status">
+                                                                <option value="Rejected"
+                                                                    {{ $item->status == 'Rejected' ? 'selected' : '' }}>
+                                                                    Rejected</option>
+                                                                <option value="Pending"
+                                                                    {{ $item->status == 'Pending' ? 'selected' : '' }}>
+                                                                    Pending</option>
+                                                                <option value="Packaging"
+                                                                    {{ $item->status == 'Packaging' ? 'selected' : '' }}>
+                                                                    Packaging</option>
+                                                                <option value="Sending"
+                                                                    {{ $item->status == 'Sending' ? 'selected' : '' }}>
+                                                                    Sending</option>
+                                                                <option value="Done"
+                                                                    {{ $item->status == 'Done' ? 'selected' : '' }}>Done
+                                                                </option>
+                                                            </select>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Close</button>
+                                                        <button type="submit" type="button"
+                                                            class="btn btn-primary">Update</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach
@@ -54,6 +102,10 @@
     <script>
         $(function() {
             $('#myTable').DataTable();
+        })
+
+        $('#exampleModal').on('show.bs.modal', function(event) {
+            $('#myInput').trigger('focus')
         })
     </script>
 @endsection

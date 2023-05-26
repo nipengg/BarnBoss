@@ -17,6 +17,7 @@ class CreateRatingsTable extends Migration
             $table->id();
             $table->string('invoice_id');
             $table->integer('rating');
+            $table->string('comment');
             $table->timestamps();
         });
     }

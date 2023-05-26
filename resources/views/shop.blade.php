@@ -20,7 +20,14 @@
             <div class="col-lg-12">
                 <div class="row">
                     <div class="col-lg-7">
-                        <h4>All Products</h4>
+                        <h4>Category Product</h4>
+                        <select name="category" id="category" class="form-control" onchange="handleSelectChange()">
+                            <option value="All" {{ $category == 'All' ? 'selected' : '' }}>All</option>
+                            @foreach ($categories as $item)
+                                <option value={{ $item->name }} {{ $category == $item->name ? 'selected' : '' }}>
+                                    {{ $item->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
                 <hr>
@@ -31,10 +38,10 @@
                                 <img src="file/{{ $pro->image }}" class="card-img-top mx-auto"
                                     style="margin-top: 20px; width: 150px; display: block;" alt="{{ $pro->image }}">
                                 <div class="card-body">
-                                    <a href="">
+                                    <a href="{{ route('product.detail', $pro->id) }}">
                                         <h6 class="card-title">{{ $pro->name }}</h6>
                                     </a>
-                                    <p>@currency($pro->price) | Stock: {{$pro->quantity}}</p>
+                                    <p>@currency($pro->price) | Stock: {{ $pro->quantity }}</p>
 
                                     <form action="{{ route('cart.store') }}" method="POST">
                                         {{ csrf_field() }}
@@ -60,4 +67,9 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+        function handleSelectChange(event) {
+            window.location.href = "{{ url('/dashboard/?category=') }}" + $("#category").val();
+        }
+    </script>
 @endsection

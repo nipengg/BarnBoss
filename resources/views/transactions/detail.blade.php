@@ -10,7 +10,7 @@
 
     <div class="container table-responsive" style="margin-top: 80px">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Transaction Detail #{{$id}}</h1>
+            <h1 class="h3 mb-0 text-gray-800">Transaction Detail #{{ $id }} &nbsp; <a target="_blank" href="{{ url('pdf', $id) }}" class="btn btn-secondary">Export PDF</a></h1>
         </div>
 
         <table id="myTable" class="table table-image table-bordered">
@@ -35,7 +35,7 @@
                         <td>{{ $item->product->category->name }}</td>
                         <td>{{ $item->status }}</td>
                         <td>
-                            <a href="" class="btn btn-info">
+                            <a href="{{ route('transaction.rating', $item->id) }}" class="btn btn-info">
                                 Give Rating
                             </a>
                         </td>

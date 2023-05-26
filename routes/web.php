@@ -35,15 +35,20 @@ Route::middleware([
     Route::post('/clear', [CartController::class, 'clear'])->name('cart.clear');
     Route::get('/store', [CartController::class, 'store'])->name('cart.checkout');
     Route::get('/pdf/{in}', [InvoiceController::class, 'genPDF']);
+    Route::get('/product/{id}', [DashboardController::class, 'productDetail'])->name('product.detail');
 });
 
 Route::prefix('/transaction')->group(function () {
     Route::get('/', [TransactionController::class, 'index'])->name('transaction');
     Route::get('/detail/{id}', [TransactionController::class, 'detail'])->name('transaction.detail');
+    Route::get('/rating/{id}', [TransactionController::class, 'rating'])->name('transaction.rating');
+    Route::post('/store/rating/{id}', [TransactionController::class, 'storeRating'])->name('store.rating');
+    Route::post('/update/rating/{id}', [TransactionController::class, 'updateRating'])->name('update.rating');
 });
 
 Route::prefix('/order')->group(function() {
     Route::get('/', [TransactionController::class, 'order'])->name('order');
+    Route::post('/update/status/{id}', [TransactionController::class, 'updateStatus'])->name('order.status.update');
 });
 
 Route::prefix('/products')

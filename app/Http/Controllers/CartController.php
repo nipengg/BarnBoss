@@ -8,14 +8,23 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\InvoiceController;
-
+use App\Models\Category;
 
 class CartController extends Controller
 {
-    public function shop()
+    public function shop(Request $request)
     {
-        $products = Product::where('quantity', '>', 0)->get();
-        return view('shop')->with(['products' => $products]);
+        $category = $request->category;
+
+        if ($category == NULL || $category == 'All') {
+            $category = 'All';
+            $products = Product::where('quantity', '>', 0)->get();
+        } else {
+            $find = Category::where('name', $category)->firstOrFail();
+            $products = Product::where('quantity', '>', 0)->where('category_id', $find->id)->get();
+        }
+        $categories = Category::all();
+        return view('shop')->with(['products' => $products, 'categories' => $categories, 'category' => $category]);
     }
 
     public function cart()

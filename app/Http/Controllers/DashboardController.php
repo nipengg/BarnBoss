@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Rating;
+use App\Models\Invoice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
@@ -76,5 +78,36 @@ class DashboardController extends Controller
         $data->delete();
 
         return redirect()->route('admin');
+    }
+
+    public function productDetail($id)
+    {
+        $product = Product::where('id', $id)->firstOrFail();
+        $invoice = Invoice::where('product_id', $product->id)->get();
+        $sumPoint = 0;
+        $enjoyProduct = 0;
+        $countRating = 0;
+        
+        foreach ($invoice as $item) {
+            $rating = Rating::where('invoice_id', $item->id)->first();
+            if (!empty($rating))
+            {
+                if ($rating->rating >= 3) $enjoyProduct++;
+                $sumPoint += $rating->rating;
+                $countRating++;
+                $ratings[] = $rating;
+            }
+        }
+
+        $avg = $sumPoint / $countRating;
+        $enjoyPercentage = ($enjoyProduct / $countRating) * 100;
+
+        return view('product-detail', [
+            'product' => $product, 
+            'countRating' => $countRating, 
+            'avg' => $avg, 
+            'percentage' => $enjoyPercentage,
+            'ratings' => $ratings
+        ]);
     }
 }

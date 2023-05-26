@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Invoice;
 use App\Models\Product;
+use App\Models\Rating;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -36,5 +37,50 @@ class TransactionController extends Controller
         // dd($orders);
 
         return view('transactions.order', ['orders' => $orders]);
+    }
+
+    public function rating($id)
+    {
+        $rating = Rating::where('invoice_id', $id)->first();
+    
+        $invoice = Invoice::where('id', $id)->firstOrFail();
+        return view('transactions.rating', ['invoice' => $invoice, 'rating' => $rating]);
+    }
+
+    public function storeRating($id, Request $request)
+    {
+        $data = $request->all();
+
+        Rating::create([
+            'invoice_id' => $id,
+            'rating' => $data['rating'],
+            'comment' => $data['comment'],
+        ]);
+
+        return redirect()->route('transaction.rating', $id);
+    }
+
+    public function updateRating($id, Request $request)
+    {
+        $data = $request->all();
+
+        // dd($data);
+
+        Rating::where('id', $id)->update([
+            'rating' => $data['rating'],
+            'comment' => $data['comment'],
+        ]);
+
+        return redirect()->route('transaction.rating', $data['invoice']);
+    }
+
+    public function updateStatus($id, Request $request)
+    {   
+        $data = $request->all();
+        Invoice::where('invoice_id', $id)->update([
+            'status' => $data['status']
+        ]);
+
+        return redirect()->route('order');
     }
 }
