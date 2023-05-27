@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\NewsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,7 +47,7 @@ Route::prefix('/transaction')->group(function () {
     Route::post('/update/rating/{id}', [TransactionController::class, 'updateRating'])->name('update.rating');
 });
 
-Route::prefix('/order')->group(function() {
+Route::prefix('/order')->group(function () {
     Route::get('/', [TransactionController::class, 'order'])->name('order');
     Route::post('/update/status/{id}', [TransactionController::class, 'updateStatus'])->name('order.status.update');
 });
@@ -71,4 +72,15 @@ Route::prefix('/category')
         Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
         Route::post('/update/{id}', [CategoryController::class, 'update'])->name('category.update');
         Route::post('/delete/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
+    });
+
+Route::prefix('/news')
+    ->middleware(['auth', 'admin'])
+    ->group(function () {
+        Route::get('/', [NewsController::class, 'index'])->name('news');
+        Route::get('/create', [NewsController::class, 'create'])->name('news.create');
+        Route::post('/store', [NewsController::class, 'store'])->name('news.store');
+        Route::get('/edit/{id}', [NewsController::class, 'edit'])->name('news.edit');
+        Route::post('/update/{id}', [NewsController::class, 'update'])->name('news.update');
+        Route::post('/delete/{id}', [NewsController::class, 'destroy'])->name('news.destroy');
     });

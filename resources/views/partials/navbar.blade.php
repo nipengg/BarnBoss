@@ -21,6 +21,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('category') }}">Manage Category</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('news') }}">Manage News</a>
+                    </li>
                 @endif
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('dashboard') }}">View Product</a>

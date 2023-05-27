@@ -31,30 +31,30 @@
                     <div class="form-group">
                         <label for="name">Product Name</label>
                         <input type="text" class="form-control" name="name" placeholder="Name"
-                            value="{{ old('name') }}">
+                            value="{{ old('name') }}" required>
                     </div>
                     <div class="form-group">
                         <label for="description">Product Description</label>
-                        <textarea class="form-control" name="description" id="description" cols="30" rows="2" placeholder="Description">{{ old('description') }}</textarea>
+                        <textarea class="form-control" name="description" id="description" cols="30" rows="2" placeholder="Description" required>{{ old('description') }}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="price">Product Price</label>
                         <input type="number" class="form-control" name="price" placeholder="Price"
-                            value="{{ old('price') }}">
+                            value="{{ old('price') }}" required>
                     </div>
                     <div class="form-group">
                         <label for="shipping_cost">Product Shipping Cost</label>
                         <input type="number" class="form-control" name="shipping_cost" placeholder="Shipping Cost"
-                            value="{{ old('shipping_cost') }}">
+                            value="{{ old('shipping_cost') }}" required>
                     </div>
                     <div class="form-group">
                         <label for="quantity">Product Quantity</label>
                         <input type="number" class="form-control" name="quantity" placeholder="Quantity"
-                            value="{{ old('quantity') }}">
+                            value="{{ old('quantity') }}" required>
                     </div>
                     <div class="form-group">
                         <label for="category_id">Category</label>
-                        <select name="category_id" required class="form-control">
+                        <select name="category_id" required class="form-control" required>
                             <option value="">Choose Category</option>
                             @foreach ($categories as $c)
                                 <option value="{{ $c->id }}">{{ $c->name }}</option>
@@ -63,7 +63,7 @@
                     </div>
                     <div class="form-group">
                         <label for="image">Image</label>
-                        <input type="file" class="form-control" name="image" placeholder="Image">
+                        <input type="file" class="form-control" name="image" placeholder="Image" required>
                     </div>
                     <button class="btn btn-primary btn-block" type="submit">
                         Simpan

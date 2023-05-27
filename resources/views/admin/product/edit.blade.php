@@ -30,26 +30,26 @@
                     <div class="form-group">
                         <label for="name">Product Name</label>
                         <input type="text" class="form-control" name="name" placeholder="Name"
-                            value="{{ $product->name }}">
+                            value="{{ $product->name }}" required>
                     </div>
                     <div class="form-group">
                         <label for="description">Product Description</label>
-                        <textarea class="form-control" name="description" id="description" cols="30" rows="2" placeholder="Description">{{ $product->description }}</textarea>
+                        <textarea class="form-control" name="description" id="description" cols="30" rows="2" placeholder="Description" required>{{ $product->description }}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="price">Product Price</label>
                         <input type="number" class="form-control" name="price" placeholder="Price"
-                            value="{{ $product->price }}">
+                            value="{{ $product->price }}" required>
                     </div>
                     <div class="form-group">
                         <label for="shipping_cost">Product Shipping Cost</label>
                         <input type="number" class="form-control" name="shipping_cost" placeholder="Shipping Cost"
-                            value="{{ $product->shipping_cost }}">
+                            value="{{ $product->shipping_cost }}" required>
                     </div>
                     <div class="form-group">
                         <label for="quantity">Product Quantity</label>
                         <input type="number" class="form-control" name="quantity" placeholder="Quantity"
-                            value="{{ $product->quantity }}">
+                            value="{{ $product->quantity }}" required>
                     </div>
                     <div class="form-group">
                         <label for="category_id">Category</label>
