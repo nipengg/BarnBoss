@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
     <div class="container" style="margin-top: 80px">
         @if (session()->has('success_msg'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -16,6 +17,34 @@
                 <li class="breadcrumb-item active" aria-current="page">Products</li>
             </ol>
         </nav>
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                @foreach ($news as $key => $item)
+                    <li data-target="#carouselExampleIndicators" data-slide-to="{{ $key }}"
+                        class="{{ $loop->iteration == 1 ? 'active' : '' }}"></li>
+                @endforeach
+            </ol>
+            <div class="carousel-inner">
+                @foreach ($news as $item)
+                    <div class="carousel-item {{ $loop->iteration == 1 ? 'active' : '' }}">
+                        <img class="d-block w-100" src="{{ URL::asset('/file/' . @$item->images) }}" style="height: 25vh;" alt="First slide">
+                        {{-- <div class="carousel-caption d-none d-md-block">
+                            <h5>{{ $item->title }}</h5>
+                            <p>{{ $item->description }}</p>
+                        </div> --}}
+                    </div>
+                @endforeach
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+        <br />
         <div class="row justify-content-center">
             <div class="col-lg-12">
                 <div class="row">

@@ -9,12 +9,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\InvoiceController;
 use App\Models\Category;
+use App\Models\News;
 
 class CartController extends Controller
 {
     public function shop(Request $request)
     {
         $category = $request->category;
+        $news = News::all();
 
         if ($category == NULL || $category == 'All') {
             $category = 'All';
@@ -24,7 +26,7 @@ class CartController extends Controller
             $products = Product::where('quantity', '>', 0)->where('category_id', $find->id)->get();
         }
         $categories = Category::all();
-        return view('shop')->with(['products' => $products, 'categories' => $categories, 'category' => $category]);
+        return view('shop')->with(['products' => $products, 'categories' => $categories, 'category' => $category, 'news' => $news]);
     }
 
     public function cart()
