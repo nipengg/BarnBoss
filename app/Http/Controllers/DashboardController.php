@@ -84,9 +84,7 @@ class DashboardController extends Controller
     {
         $product = Product::where('id', $id)->firstOrFail();
         $invoice = Invoice::where('product_id', $product->id)->get();
-        $sumPoint = 0;
-        $enjoyProduct = 0;
-        $countRating = 0;
+        $sumPoint = 0; $enjoyProduct = 0; $countRating = 0; $avg = 0; $enjoyPercentage = 0; $ratings = [];
         
         foreach ($invoice as $item) {
             $rating = Rating::where('invoice_id', $item->id)->first();
@@ -99,8 +97,11 @@ class DashboardController extends Controller
             }
         }
 
-        $avg = $sumPoint / $countRating;
-        $enjoyPercentage = ($enjoyProduct / $countRating) * 100;
+        if ($countRating != 0)
+        {
+            $avg = $sumPoint / $countRating;
+            $enjoyPercentage = ($enjoyProduct / $countRating) * 100;
+        }
 
         return view('product-detail', [
             'product' => $product, 

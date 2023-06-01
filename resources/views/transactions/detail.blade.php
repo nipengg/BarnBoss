@@ -35,7 +35,7 @@
                         <td>{{ $item->product->category->name }}</td>
                         <td>{{ $item->status }}</td>
                         <td>
-                            <a href="{{ route('transaction.rating', $item->id) }}" class="btn btn-info">
+                            <a href="{{ route('transaction.rating', $item->id) }}" class="btn {{ $item->status != 'Done' ? 'btn-danger disabled' : 'btn-info' }}">
                                 Give Rating
                             </a>
                         </td>

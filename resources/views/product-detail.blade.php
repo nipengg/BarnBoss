@@ -376,7 +376,9 @@
                         </div>
                         <p class="product-description">{{ $product->description }}</p>
                         <h4 class="price">price: <span>@currency($product->price)</span></h4>
-                        <p class="vote"><strong>{{ $percentage }}%</strong> of buyers enjoyed this product!
+                        @if ($percentage != 0)
+                            <p class="vote"><strong>{{ $percentage }}%</strong> of buyers enjoyed this product!
+                        @endif
                         </p>
                         <div class="action">
                             <button class="add-to-cart btn btn-default" type="button">add to cart</button>
@@ -388,27 +390,27 @@
         <br>
         <hr>
         <h1>Ratings</h1>
-        @foreach ($ratings as $item)
+        @forelse ($ratings as $item)
             <div class="card">
                 <div class="details col-md-6">
                     <h3 class="product-title">{{ $item->invoice->user->name }}</h3>
                     <div class="rating">
                         <div class="stars">
                             <div class="rate">
-                                <input type="radio" id="star5" class="rate" name="ratings{{ $item->id }}" value="5"
-                                    {{ $item->rating == 5 ? 'checked' : '' }} disabled />
+                                <input type="radio" id="star5" class="rate" name="ratings{{ $item->id }}"
+                                    value="5" {{ $item->rating == 5 ? 'checked' : '' }} disabled />
                                 <label for="star5" title="text">5 stars</label>
-                                <input type="radio" id="star4" class="rate" name="ratings{{ $item->id }}" value="4"
-                                    {{ $item->rating == 4 ? 'checked' : '' }} disabled />
+                                <input type="radio" id="star4" class="rate" name="ratings{{ $item->id }}"
+                                    value="4" {{ $item->rating == 4 ? 'checked' : '' }} disabled />
                                 <label for="star4" title="text">4 stars</label>
-                                <input type="radio" id="star3" class="rate" name="ratings{{ $item->id }}" value="3"
-                                    {{ $item->rating == 3 ? 'checked' : '' }} disabled />
+                                <input type="radio" id="star3" class="rate" name="ratings{{ $item->id }}"
+                                    value="3" {{ $item->rating == 3 ? 'checked' : '' }} disabled />
                                 <label for="star3" title="text">3 stars</label>
-                                <input type="radio" id="star2" class="rate" name="ratings{{ $item->id }}" value="2"
-                                    {{ $item->rating == 2 ? 'checked' : '' }} disabled />
+                                <input type="radio" id="star2" class="rate" name="ratings{{ $item->id }}"
+                                    value="2" {{ $item->rating == 2 ? 'checked' : '' }} disabled />
                                 <label for="star2" title="text">2 stars</label>
-                                <input type="radio" id="star1" class="rate" name="ratings{{ $item->id }}" value="1"
-                                    {{ $item->rating == 1 ? 'checked' : '' }} disabled />
+                                <input type="radio" id="star1" class="rate" name="ratings{{ $item->id }}"
+                                    value="1" {{ $item->rating == 1 ? 'checked' : '' }} disabled />
                                 <label for="star1" title="text">1 star</label>
                             </div>
                         </div>
@@ -416,7 +418,9 @@
                     <p class="product-description">{{ $item->comment }}</p>
                 </div>
             </div>
-        @endforeach
+        @empty
+            <h4>No Review for this product...</h4>
+        @endforelse
     </div>
     <script type="text/javascript">
         function handleSelectChange(event) {

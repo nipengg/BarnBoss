@@ -16,17 +16,29 @@ class CartController extends Controller
     public function shop(Request $request)
     {
         $category = $request->category;
+        $search = $request->search;
         $news = News::all();
 
-        if ($category == NULL || $category == 'All') {
-            $category = 'All';
-            $products = Product::where('quantity', '>', 0)->get();
-        } else {
+        // dd($search);
+
+        if ($category != NULL) {
             $find = Category::where('name', $category)->firstOrFail();
             $products = Product::where('quantity', '>', 0)->where('category_id', $find->id)->get();
+        } else if ($search != NULL) {
+            $products = Product::where('quantity', '>', 0)->where('name', 'LIKE', '%' . $search . '%')->get();
+        } else {
+            $category = 'All';
+            $search = '';
+            $products = Product::where('quantity', '>', 0)->get();
         }
         $categories = Category::all();
-        return view('shop')->with(['products' => $products, 'categories' => $categories, 'category' => $category, 'news' => $news]);
+        return view('shop')->with([
+            'products' => $products, 
+            'categories' => $categories, 
+            'category' => $category, 
+            'search' => $search,
+            'news' => $news
+        ]);
     }
 
     public function cart()

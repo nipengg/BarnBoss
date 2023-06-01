@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
     <div class="container" style="margin-top: 80px">
         @if (session()->has('success_msg'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -27,11 +26,12 @@
             <div class="carousel-inner">
                 @foreach ($news as $item)
                     <div class="carousel-item {{ $loop->iteration == 1 ? 'active' : '' }}">
-                        <img class="d-block w-100" src="{{ URL::asset('/file/' . @$item->images) }}" style="height: 25vh;" alt="First slide">
-                        {{-- <div class="carousel-caption d-none d-md-block">
+                        <img class="d-block w-100" src="{{ URL::asset('/file/' . @$item->images) }}" style="height: 25vh;"
+                            alt="First slide">
+                        <div class="carousel-caption d-none d-md-block">
                             <h5>{{ $item->title }}</h5>
                             <p>{{ $item->description }}</p>
-                        </div> --}}
+                        </div>
                     </div>
                 @endforeach
             </div>
@@ -49,27 +49,35 @@
             <div class="col-lg-12">
                 <div class="row">
                     <div class="col-lg-7">
-                        <h4>Category Product</h4>
-                        <select name="category" id="category" class="form-control" onchange="handleSelectChange()">
-                            <option value="All" {{ $category == 'All' ? 'selected' : '' }}>All</option>
-                            @foreach ($categories as $item)
-                                <option value={{ $item->name }} {{ $category == $item->name ? 'selected' : '' }}>
-                                    {{ $item->name }}</option>
-                            @endforeach
-                        </select>
+                        <h4>All Product</h4>
+                        <div class="row">
+                            <div class="col">
+                                <input class="form-control" value="{{ $search }}" type="text" name="search" id="search" placeholder="Search...">
+                            </div>
+                            <div class="col">
+                                <select name="category" id="category" class="form-control" onchange="handleSelectChange()">
+                                    <option value="All" {{ $category == 'All' ? 'selected' : '' }}>All</option>
+                                    @foreach ($categories as $item)
+                                        <option value={{ $item->name }} {{ $category == $item->name ? 'selected' : '' }}>
+                                            {{ $item->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <hr>
                 <div class="row">
                     @foreach ($products as $pro)
                         <div class="col-lg-3">
-                            <div class="card" style="margin-bottom: 20px; height: auto;">
+                            <div class="card" style="margin-bottom: 20px; height: 300px;">
                                 <img src="file/{{ $pro->image }}" class="card-img-top mx-auto"
                                     style="margin-top: 20px; width: 150px; display: block;" alt="{{ $pro->image }}">
                                 <div class="card-body">
                                     <a href="{{ route('product.detail', $pro->id) }}">
                                         <h6 class="card-title">{{ $pro->name }}</h6>
                                     </a>
+                                    <p>{{ $pro->owner->name }}</p>
                                     <p>@currency($pro->price) | Stock: {{ $pro->quantity }}</p>
 
                                     <form action="{{ route('cart.store') }}" method="POST">
@@ -98,7 +106,19 @@
     </div>
     <script type="text/javascript">
         function handleSelectChange(event) {
-            window.location.href = "{{ url('/dashboard/?category=') }}" + $("#category").val();
+            if ($("#category").val() != 'All') {
+                window.location.href = "{{ url('/dashboard/?category=') }}" + $("#category").val();
+            } else {
+                window.location.href = "{{ url('/dashboard/') }}";
+            }
         }
+
+        var input = document.getElementById("search");
+
+        input.addEventListener("keypress", function(event) {
+            if (event.keyCode == 13) {
+                window.location.href = "{{ url('/dashboard/?search=') }}" + $("#search").val();
+            }
+        });
     </script>
 @endsection
