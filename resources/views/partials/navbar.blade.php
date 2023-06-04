@@ -1,5 +1,7 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark shadow-sm">
     <div class="container">
+        <img src="{{ URL::asset('/images/Logo_Barn_Boss_White.png') }}" alt="" style="width: 50px; height: 50px">
+        &nbsp; &nbsp;
         <a class="navbar-brand" href="{{ url('/') }}">
             Barn Boss
         </a>
@@ -19,7 +21,7 @@
                 @endif
                 @if (Auth::user()->role == 1)
                     <li class="nav-item">
-                        <a class="nav-link" href="">Manage Seller</a>
+                        <a class="nav-link" href="{{ route('seller') }}">Manage Seller</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('category') }}">Manage Category</a>

@@ -7,6 +7,7 @@ use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\SellerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,6 +73,17 @@ Route::prefix('/category')
         Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
         Route::post('/update/{id}', [CategoryController::class, 'update'])->name('category.update');
         Route::post('/delete/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
+    });
+
+Route::prefix('/seller')
+    ->middleware(['auth', 'admin'])
+    ->group(function () {
+        Route::get('/', [SellerController::class, 'index'])->name('seller');
+        Route::get('/create', [SellerController::class, 'create'])->name('seller.create');
+        Route::post('/store', [SellerController::class, 'store'])->name('seller.store');
+        Route::get('/edit/{id}', [SellerController::class, 'edit'])->name('seller.edit');
+        Route::post('/update/{id}', [SellerController::class, 'update'])->name('seller.update');
+        Route::post('/delete/{id}', [SellerController::class, 'destroy'])->name('seller.destroy');
     });
 
 Route::prefix('/news')
