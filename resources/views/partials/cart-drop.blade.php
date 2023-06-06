@@ -10,7 +10,7 @@
                     <br><small>Qty: {{ $item->quantity }}</small>
                 </div>
                 <div class="col-lg-3">
-                    <p>${{ \Cart::get($item->id)->getPriceSum() }}</p>
+                    <p>@currency(\Cart::get($item->id)->getPriceSum())</p>
                 </div>
                 <hr>
             </div>
@@ -20,7 +20,7 @@
     <li class="list-group-item">
         <div class="row">
             <div class="col-lg-10">
-                <b>Total: </b>${{ \Cart::getTotal() }}
+                <b>Total: </b>@currency(\Cart::getTotal())
             </div>
             <div class="col-lg-2">
                 <form action="{{ route('cart.clear') }}" method="POST">

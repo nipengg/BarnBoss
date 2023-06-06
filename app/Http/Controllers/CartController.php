@@ -134,6 +134,6 @@ class CartController extends Controller
 
         \Cart::clear();
         DB::commit();
-        return redirect()->action([InvoiceController::class, 'genPDF'], ['in' => $in]);
+        return redirect()->route('transaction');
     }
 }
