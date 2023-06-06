@@ -21,7 +21,7 @@ class TransactionController extends Controller
         $transactions = Invoice::where('invoice_id', $id)->get();
         $total = 0;
         foreach ($transactions as $item) {
-            $total = $total + $item->total;
+            $total = $total + ($item->total * $item->qty);
         }
         return view('transactions.detail', ['transactions' => $transactions, 'id' => $id, 'total' => $total]);
     }
