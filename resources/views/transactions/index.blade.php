@@ -10,7 +10,7 @@
 
     <div class="container table-responsive" style="margin-top: 80px">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">My Transaction</h1>
+            <h1 class="h3 mb-0 text-gray-800">My Transaction &nbsp; <a target="_blank" href="{{ url('allpdf') }}" class="btn btn-secondary">Export PDF</a></h1>
         </div>
 
         <table id="myTable" class="table table-image table-bordered">

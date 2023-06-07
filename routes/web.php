@@ -37,6 +37,7 @@ Route::middleware([
     Route::post('/clear', [CartController::class, 'clear'])->name('cart.clear');
     Route::get('/store', [CartController::class, 'store'])->name('cart.checkout');
     Route::get('/pdf/{in}', [InvoiceController::class, 'genPDF']);
+    Route::get('/allpdf', [InvoiceController::class, 'genAllPDF']);
     Route::get('/product/{id}', [DashboardController::class, 'productDetail'])->name('product.detail');
 });
 
