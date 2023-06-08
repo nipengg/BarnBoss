@@ -24,6 +24,10 @@ class NewsController extends Controller
     {
         $data = $request->all();
 
+        $request->validate([
+            'images' => 'max:2000|mimes:jpeg,jpg,png'
+        ]);
+
         if ($file = $request->file('images')) {
             $destinationPath = 'file/';
             $fileInput = date('YmdHis') . "." . $file->getClientOriginalExtension();
@@ -32,7 +36,7 @@ class NewsController extends Controller
         }
 
         News::create($data);
-        return redirect()->route('news');
+        return redirect()->route('news')->with('success_message', 'Success!');
     }
 
     public function edit($id)
@@ -63,7 +67,7 @@ class NewsController extends Controller
 
         $item->update($data);
 
-        return redirect()->route('news');
+        return redirect()->route('news')->with('success_message', 'Success!');
     }
 
     public function destroy($id)
@@ -73,6 +77,6 @@ class NewsController extends Controller
         File::delete($file_path);
         $data->delete();
 
-        return redirect()->route('news');
+        return redirect()->route('news')->with('success_message', 'Success!');
     }
 }

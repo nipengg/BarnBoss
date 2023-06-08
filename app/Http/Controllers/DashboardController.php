@@ -26,6 +26,10 @@ class DashboardController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'image' => 'max:2000|mimes:jpeg,jpg,png,webp'
+        ]);
+
         $data = $request->all();
         if ($file = $request->file('image')) {
             $destinationPath = 'file/';
@@ -35,7 +39,7 @@ class DashboardController extends Controller
         }
 
         Product::create($data);
-        return redirect()->route('admin');
+        return redirect()->route('admin')->with('success_message', 'Success!');
     }
 
     public function edit($id)
@@ -67,7 +71,7 @@ class DashboardController extends Controller
 
         $item->update($data);
 
-        return redirect()->route('admin');
+        return redirect()->route('admin')->with('success_message', 'Success!');
     }
 
     public function destroy($id)
@@ -77,7 +81,7 @@ class DashboardController extends Controller
         File::delete($file_path);
         $data->delete();
 
-        return redirect()->route('admin');
+        return redirect()->route('admin')->with('success_message', 'Success!');
     }
 
     public function productDetail($id)

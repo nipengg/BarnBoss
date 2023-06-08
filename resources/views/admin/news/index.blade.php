@@ -9,6 +9,16 @@
     </head>
 
     <div class="container table-responsive" style="margin-top: 80px">
+        @if (session('success_message'))
+            <div class="alert alert-success">
+                {{ session('success_message') }}
+            </div>
+        @endif
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Manage News</h1>
             <a href="{{ route('news.create') }}" class="btn btn-sm btn-primary shadow-sm">
