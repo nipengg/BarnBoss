@@ -33,10 +33,10 @@
     <br>
     <div class="row" style="margin: 0px;">
         <a class="btn btn-dark btn-sm btn-block" href="{{ route('cart.index') }}">
-            Faktur <i class="fa fa-arrow-right"></i>
+            Cart <i class="fa fa-arrow-right"></i>
         </a>
         <a class="btn btn-dark btn-sm btn-block" href="">
-            Cetak Faktur <i class="fa fa-arrow-right"></i>
+            Finish Order Cart <i class="fa fa-arrow-right"></i>
         </a>
     </div>
 @else

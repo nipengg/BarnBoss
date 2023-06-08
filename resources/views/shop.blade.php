@@ -91,7 +91,7 @@
                                             <div class="row">
                                                 <button class="btn btn-secondary btn-sm" class="tooltip-test"
                                                     title="add to cart">
-                                                    Tambah ke Faktur
+                                                    Add to cart
                                                 </button>
                                             </div>
                                         </div>

@@ -5,7 +5,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Product</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Faktur</li>
+                <li class="breadcrumb-item active" aria-current="page">Cart</li>
             </ol>
         </nav>
         @if (session()->has('success_msg'))
@@ -38,9 +38,9 @@
             <div class="col-lg-7">
                 <br>
                 @if (\Cart::getTotalQuantity() > 0)
-                    <h4>{{ \Cart::getTotalQuantity() }} Produk Faktur</h4><br>
+                    <h4>{{ \Cart::getTotalQuantity() }} Produk Cart</h4><br>
                 @else
-                    <h4>Tidak ada produk di faktur</h4><br>
+                    <h4>Tidak ada produk di cart</h4><br>
                     <a href="/" class="btn btn-dark">View Product</a>
                 @endif
 
@@ -97,7 +97,7 @@
                         </ul>
                     </div>
                     <br><a href="/dashboard" class="btn btn-dark">Kembali</a>
-                    <a href="/store" class="btn btn-success">Cetak Faktur</a>
+                    <a href="/store" class="btn btn-success">Finish Order</a>
                 </div>
             @endif
         </div>

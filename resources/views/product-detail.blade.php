@@ -380,9 +380,16 @@
                             <p class="vote"><strong>{{ $percentage }}%</strong> of buyers enjoyed this product!
                         @endif
                         </p>
-                        <div class="action">
-                            <button class="add-to-cart btn btn-default" type="button">add to cart</button>
-                        </div>
+                        <form action="{{ route('cart.store') }}" method="POST">
+                            {{ csrf_field() }}
+                            <input type="hidden" value="{{ $product->id }}" id="id" name="id">
+                            <input type="hidden" value="{{ $product->name }}" id="name" name="name">
+                            <input type="hidden" value="{{ $product->price }}" id="price" name="price">
+                            <input type="hidden" value="{{ $product->image }}" id="img" name="img">
+                            <input type="hidden" value="1" id="quantity" name="quantity">
+                            <button class="add-to-cart btn btn-default" class="tooltip-test" title="add to cart">
+                                Add to cart
+                        </form>
                     </div>
                 </div>
             </div>
