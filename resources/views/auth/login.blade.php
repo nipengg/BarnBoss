@@ -40,6 +40,12 @@
                         {{ __('Register') }}
                     </a>
                 @endif
+                &nbsp; &nbsp;
+                @if (Route::has('password.request'))
+                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('seller.create') }}">
+                        {{ __('Register as seller') }}
+                    </a>
+                @endif
 
                 <x-jet-button class="ml-4">
                     {{ __('Log in') }}

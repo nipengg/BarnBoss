@@ -17,7 +17,7 @@ class SellerController extends Controller
 
     public function create()
     {
-        return view('admin.seller.create');
+        return view('auth.register-seller');
     }
 
     public function store(Request $request)
@@ -31,7 +31,7 @@ class SellerController extends Controller
             'password' => 'string|max:255',
         ]);
 
-        if($data['password'] != $data['confirm']) {
+        if($data['password'] != $data['password_confirmation']) {
             return redirect()->route('seller.create')->with('error_message', 'Password does not match');
         }
 
@@ -43,7 +43,7 @@ class SellerController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
-        return redirect()->route('seller')->with('success_message', 'Success!');
+        return redirect()->route('login')->with('success_message', 'Success!');
     }
 
     public function edit($id)

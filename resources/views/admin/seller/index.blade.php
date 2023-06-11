@@ -16,9 +16,6 @@
         @endif
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Manage Seller</h1>
-            <a href="{{ route('seller.create') }}" class="btn btn-sm btn-primary shadow-sm">
-                <i class="fa fa-plus"></i> Add Seller
-            </a>
         </div>
 
         <table id="myTable" class="table table-image table-bordered">
@@ -79,7 +76,6 @@
             </tbody>
         </table>
     </div>
-
     <script>
         $(function() {
             $('#myTable').DataTable();

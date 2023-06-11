@@ -24,6 +24,9 @@ Route::get('/', function () {
     return redirect('/login');
 });
 
+Route::get('/register/seller', [SellerController::class, 'create'])->name('seller.create');
+Route::post('/store/seller', [SellerController::class, 'store'])->name('seller.store');
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -80,8 +83,6 @@ Route::prefix('/seller')
     ->middleware(['auth', 'admin'])
     ->group(function () {
         Route::get('/', [SellerController::class, 'index'])->name('seller');
-        Route::get('/create', [SellerController::class, 'create'])->name('seller.create');
-        Route::post('/store', [SellerController::class, 'store'])->name('seller.store');
         Route::get('/edit/{id}', [SellerController::class, 'edit'])->name('seller.edit');
         Route::post('/update/{id}', [SellerController::class, 'update'])->name('seller.update');
         Route::post('/delete/{id}', [SellerController::class, 'destroy'])->name('seller.destroy');
