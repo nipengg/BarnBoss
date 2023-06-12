@@ -52,7 +52,8 @@
                         <h4>All Product</h4>
                         <div class="row">
                             <div class="col">
-                                <input class="form-control" value="{{ $search }}" type="text" name="search" id="search" placeholder="Search...">
+                                <input class="form-control" value="{{ $search }}" type="text" name="search"
+                                    id="search" placeholder="Search...">
                             </div>
                             <div class="col">
                                 <select name="category" id="category" class="form-control" onchange="handleSelectChange()">
@@ -89,10 +90,12 @@
                                         <input type="hidden" value="1" id="quantity" name="quantity">
                                         <div class="card-footer" style="background-color: white;">
                                             <div class="row">
-                                                <button class="btn btn-secondary btn-sm" class="tooltip-test"
-                                                    title="add to cart">
-                                                    Add to cart
-                                                </button>
+                                                @if (Auth::user()->role != 1)
+                                                    <button class="btn btn-secondary btn-sm" class="tooltip-test"
+                                                        title="add to cart">
+                                                        Add to cart
+                                                    </button>
+                                                @endif
                                             </div>
                                         </div>
                                     </form>

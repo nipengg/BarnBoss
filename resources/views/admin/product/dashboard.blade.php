@@ -29,11 +29,14 @@
         <table id="myTable" class="table table-image table-bordered">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
                     <th scope="col">Name</th>
                     <th scope="col">Price</th>
                     <th scope="col">Qty</th>
                     <th scope="col">Category</th>
+                    <th scope="col">Weight & Length</th>
+                    <th scope="col">Color</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Health History</th>
                     <th scope="col">Image</th>
                     <th scope="col">Action</th>
                 </tr>
@@ -41,11 +44,14 @@
             <tbody>
                 @foreach ($products as $product)
                     <tr>
-                        <th scope="row">{{ $product->id }}</th>
                         <td>{{ $product->name }}</td>
                         <td>@currency($product->price)</td>
                         <td>{{ $product->quantity }}</td>
                         <td>{{ $product->category->name }}</td>
+                        <td>{{ $product->weight }}kg & {{ $product->length }}m</td>
+                        <td>{{ $product->color }}</td>
+                        <td>{{ $product->location }}</td>
+                        <td>{{ $product->health_history }}</td>
                         <td><img src="{{ URL::asset('/file/' . @$product->image) }}" class="card-img-top mx-auto"
                                 style="width: 150px;display: block;" alt="{{ $product->image }}"></td>
                         <td>

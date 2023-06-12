@@ -28,26 +28,46 @@
                 <form action="{{ route('product.update', $product->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
-                        <label for="name">Product Name</label>
+                        <label for="name">Name</label>
                         <input type="text" class="form-control" name="name" placeholder="Name"
                             value="{{ $product->name }}" required>
                     </div>
                     <div class="form-group">
-                        <label for="description">Product Description</label>
-                        <textarea class="form-control" name="description" id="description" cols="30" rows="2" placeholder="Description" required>{{ $product->description }}</textarea>
+                        <label for="description">Description</label>
+                        <textarea class="form-control" name="description" id="description" cols="30" rows="2" placeholder="Description">{{ $product->description }}</textarea>
                     </div>
                     <div class="form-group">
-                        <label for="price">Product Price</label>
+                        <label for="price">Price</label>
                         <input type="number" class="form-control" name="price" placeholder="Price"
                             value="{{ $product->price }}" required>
                     </div>
                     <div class="form-group">
-                        <label for="shipping_cost">Product Shipping Cost</label>
-                        <input type="number" class="form-control" name="shipping_cost" placeholder="Shipping Cost"
-                            value="{{ $product->shipping_cost }}" required>
+                        <label for="weight">Weight</label>
+                        <input type="number" class="form-control" name="weight" placeholder="Weight"
+                            value="{{ $product->weight }}" required>
                     </div>
                     <div class="form-group">
-                        <label for="quantity">Product Quantity</label>
+                        <label for="length">Length</label>
+                        <input type="number" class="form-control" name="length" placeholder="Length"
+                            value="{{ $product->length }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="color">Color</label>
+                        <input type="text" class="form-control" name="color" placeholder="Color"
+                            value="{{ $product->color }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <input type="text" class="form-control" name="location" placeholder="Location"
+                            value="{{ $product->location }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="health_history">Health History</label>
+                        <input type="text" class="form-control" name="health_history" placeholder="Health History"
+                            value="{{ $product->health_history }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="quantity">Quantity</label>
                         <input type="number" class="form-control" name="quantity" placeholder="Quantity"
                             value="{{ $product->quantity }}" required>
                     </div>

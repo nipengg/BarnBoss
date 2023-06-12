@@ -10,27 +10,23 @@
 
     <div class="container table-responsive" style="margin-top: 80px">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">My Transaction &nbsp; <a target="_blank" href="{{ url('allpdf') }}" class="btn btn-secondary">Export PDF</a></h1>
+            <h1 class="h3 mb-0 text-gray-800">Order Chat</h1>
         </div>
 
         <table id="myTable" class="table table-image table-bordered">
             <thead>
                 <tr>
                     <th scope="col">#ID</th>
-                    <th scope="col">Chat</th>
+                    <th scope="col">Buyer</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($transactions as $item)
+                @foreach ($chats as $item)
                     <tr>
                         <td>{{ $item->invoice_id }}</td>
-                        <td><a href="{{ route('chat', $item->invoice_id) }}" class="btn btn-secondary">Chat Seller</a></td>
-                        <td>
-                            <a href="{{ route('transaction.detail', $item->invoice_id) }}" class="btn btn-info">
-                                View
-                            </a>
-                        </td>
+                        <td>{{ $item->user->name }}</td>
+                        <td><a href="{{ route('room', $item->id) }}" class="btn btn-secondary">Chat</a></td>
                     </tr>
                 @endforeach
             </tbody>

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TransactionController;
@@ -66,6 +67,15 @@ Route::prefix('/products')
         Route::get('/edit/{id}', [DashboardController::class, 'edit'])->name('product.edit');
         Route::post('/update/{id}', [DashboardController::class, 'update'])->name('product.update');
         Route::post('/delete/{id}', [DashboardController::class, 'destroy'])->name('product.destroy');
+    });
+
+Route::prefix('/chat')
+    ->middleware(['auth'])
+    ->group(function () {
+        Route::get('/seller', [ChatController::class, 'indexSeller'])->name('chat.seller');
+        Route::get('/{id}', [ChatController::class, 'index'])->name('chat');
+        Route::get('/room/{id}', [ChatController::class, 'room'])->name('room');
+        Route::post('/send/{id}', [ChatController::class, 'send'])->name('send');
     });
 
 Route::prefix('/category')

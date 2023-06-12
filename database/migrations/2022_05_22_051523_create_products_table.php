@@ -16,9 +16,13 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->double('price');
-            $table->double('shipping_cost');
+            $table->double('weight');
+            $table->double('length');
+            $table->string('color');
+            $table->string('location');
+            $table->string('health_history');
             $table->integer('quantity');
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('owner_id');

@@ -29,26 +29,46 @@
                     @csrf
                     <input type="hidden" name="owner_id" value={{ Auth::user()->id }}>
                     <div class="form-group">
-                        <label for="name">Product Name</label>
+                        <label for="name">Name</label>
                         <input type="text" class="form-control" name="name" placeholder="Name"
                             value="{{ old('name') }}" required>
                     </div>
                     <div class="form-group">
-                        <label for="description">Product Description</label>
-                        <textarea class="form-control" name="description" id="description" cols="30" rows="2" placeholder="Description" required>{{ old('description') }}</textarea>
+                        <label for="description">Description (Optional)</label>
+                        <textarea class="form-control" name="description" id="description" cols="30" rows="2" placeholder="Description">{{ old('description') }}</textarea>
                     </div>
                     <div class="form-group">
-                        <label for="price">Product Price</label>
+                        <label for="price">Price</label>
                         <input type="number" class="form-control" name="price" placeholder="Price"
                             value="{{ old('price') }}" required>
                     </div>
                     <div class="form-group">
-                        <label for="shipping_cost">Product Shipping Cost</label>
-                        <input type="number" class="form-control" name="shipping_cost" placeholder="Shipping Cost"
-                            value="{{ old('shipping_cost') }}" required>
+                        <label for="weight">Weight</label>
+                        <input type="number" class="form-control" name="weight" placeholder="Weight"
+                            value="{{ old('weight') }}" required>
                     </div>
                     <div class="form-group">
-                        <label for="quantity">Product Quantity</label>
+                        <label for="length">Length</label>
+                        <input type="number" class="form-control" name="length" placeholder="Length"
+                            value="{{ old('length') }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="color">Color</label>
+                        <input type="text" class="form-control" name="color" placeholder="Color"
+                            value="{{ old('color') }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <input type="text" class="form-control" name="location" placeholder="Location"
+                            value="{{ old('location') }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="health_history">Health History</label>
+                        <input type="text" class="form-control" name="health_history" placeholder="Health History"
+                            value="{{ old('health_histor') }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="quantity">Quantity</label>
                         <input type="number" class="form-control" name="quantity" placeholder="Quantity"
                             value="{{ old('quantity') }}" required>
                     </div>

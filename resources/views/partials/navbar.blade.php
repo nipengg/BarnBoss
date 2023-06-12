@@ -18,6 +18,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('order') }}">My Order</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('chat.seller') }}">Chat</a>
+                    </li>
                 @endif
                 @if (Auth::user()->role == 1)
                     <li class="nav-item">

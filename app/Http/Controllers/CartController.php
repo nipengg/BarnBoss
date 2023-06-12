@@ -7,8 +7,8 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\InvoiceController;
 use App\Models\Category;
+use App\Models\Chat;
 use App\Models\News;
 
 class CartController extends Controller
@@ -33,9 +33,9 @@ class CartController extends Controller
         }
         $categories = Category::all();
         return view('shop')->with([
-            'products' => $products, 
-            'categories' => $categories, 
-            'category' => $category, 
+            'products' => $products,
+            'categories' => $categories,
+            'category' => $category,
             'search' => $search,
             'news' => $news
         ]);
@@ -117,8 +117,11 @@ class CartController extends Controller
         $date = Carbon::now()->toDateTimeString();
         $userId = Auth::user()->id;
         $in = uniqid();
+        $arr = [];
 
         foreach ($cartCollection as $item) {
+            $product = Product::where("id", $item['id'])->firstOrFail();
+
             DB::insert("
                     INSERT INTO invoices
                     (invoice_id, product_id, qty, total, user_id, created_at, updated_at)
@@ -130,8 +133,18 @@ class CartController extends Controller
                 SET quantity = quantity - ?
                 WHERE id = ?
             ", [$item['quantity'], $item['id']]);
-        }
 
+            if (in_array($product->owner->id, $arr)) {
+                continue;
+            } else {
+                Chat::create([
+                    "seller_id" => $product->owner->id,
+                    "user_id" => $userId,
+                    "invoice_id" => $in
+                ]); 
+            }
+            $arr[] = $product->owner->id;
+        }
         \Cart::clear();
         DB::commit();
         return redirect()->route('transaction');

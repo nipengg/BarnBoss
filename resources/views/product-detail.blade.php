@@ -374,7 +374,8 @@
                             </div>
                             <span class="review-no">{{ $countRating }} reviews</span>
                         </div>
-                        <p class="product-description">{{ $product->description }}</p>
+                        <p class="product-description">Location: <strong>{{ $product->location }}</strong> | Health History: <strong>{{ $product->health_history }}</strong></p>
+                        <p class="product-description">Weight: <strong>{{ $product->weight }}kg</strong>  |  Length: <strong>{{ $product->length }}m</strong>  |  Color: <strong>{{ $product->color }}</strong></p>
                         <h4 class="price">price: <span>@currency($product->price)</span></h4>
                         @if ($percentage != 0)
                             <p class="vote"><strong>{{ $percentage }}%</strong> of buyers enjoyed this product!
@@ -387,7 +388,7 @@
                             <input type="hidden" value="{{ $product->price }}" id="price" name="price">
                             <input type="hidden" value="{{ $product->image }}" id="img" name="img">
                             <input type="hidden" value="1" id="quantity" name="quantity">
-                            <button class="add-to-cart btn btn-default" class="tooltip-test" title="add to cart">
+                            <button class="add-to-cart btn btn-default" class="tooltip-test" title="add to cart" {{ Auth::user()->role != 1 ? '' : 'disabled' }}>
                                 Add to cart
                         </form>
                     </div>
