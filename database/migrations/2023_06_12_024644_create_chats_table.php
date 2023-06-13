@@ -21,7 +21,7 @@ class CreateChatsTable extends Migration
             $table->enum("status", ["Progress", "Done"])->default("Progress");
             $table->timestamps();
 
-            $table->foreign('seller_id')->references('id')->on('users');
+            $table->foreign('seller_id')->references('id')->on('users')->onDelete('cascade');;
             $table->foreign('user_id')->references('id')->on('users');
         });
     }

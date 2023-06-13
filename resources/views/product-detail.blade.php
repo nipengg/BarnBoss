@@ -352,6 +352,7 @@
                     </div>
                     <div class="details col-md-6">
                         <h3 class="product-title">{{ $product->name }}</h3>
+                        <p class="product-description">{{ $product->description }}</p>
                         <div class="rating">
                             <div class="stars">
                                 <div class="rate">
