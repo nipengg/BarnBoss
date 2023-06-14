@@ -59,7 +59,7 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                All the seller product will be deleted as well.
+                                                All the seller product, chat and messages will be deleted as well.
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
